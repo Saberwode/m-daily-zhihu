@@ -22,7 +22,7 @@ export default {
         pagination: ".swiper-pagination",
         paginationClickable: true,
         loop: true,
-        autoplay: 1000,
+        autoplay: 3000,
         autoplayDisableOnInteraction: false,
         // autoplay: {
         //   delay: 1000,

@@ -7,9 +7,16 @@
       :imgUrl="item.images"
       :title="item.title"
       :hint="item.hint"
+      :url="item.url"
     ></content-item>
     <!-- <div class="test" v-for="item in 5" :key="item" v-text="1"> -->
-    <div class="infinite-list" v-infinite-scroll="load" style="overflow: auto">
+    <div
+      class="infinite-list"
+      v-infinite-scroll="load"
+      style="overflow: auto"
+      infinite-scroll-delay="800"
+      infinite-scroll-distance="10"
+    >
       <div
         class="before infinite-list-item"
         v-for="item in beforeData"
@@ -22,31 +29,37 @@
           :imgUrl="item.stories[0].images"
           :title="item.stories[0].title"
           :hint="item.stories[0].hint"
+          :url="item.stories[0].url"
         ></content-item>
         <content-item
           :imgUrl="item.stories[1].images"
           :title="item.stories[1].title"
           :hint="item.stories[1].hint"
+          :url="item.stories[1].url"
         ></content-item>
         <content-item
           :imgUrl="item.stories[2].images"
           :title="item.stories[2].title"
           :hint="item.stories[2].hint"
+          :url="item.stories[2].url"
         ></content-item>
         <content-item
           :imgUrl="item.stories[3].images"
           :title="item.stories[3].title"
           :hint="item.stories[3].hint"
+          :url="item.stories[3].url"
         ></content-item>
         <content-item
           :imgUrl="item.stories[4].images"
           :title="item.stories[4].title"
           :hint="item.stories[4].hint"
+          :url="item.stories[4].url"
         ></content-item>
         <content-item
           :imgUrl="item.stories[5].images"
           :title="item.stories[5].title"
           :hint="item.stories[5].hint"
+          :url="item.stories[5].url"
         ></content-item>
       </div>
     </div>
@@ -99,12 +112,12 @@ export default {
     },
     beforeDate(item) {
       // console.log(item.date - 1);
-      console.log(typeof item.date);
+      // console.log(typeof item.date);
       let date = String(item.date).split("");
-      console.log(date);
+      // console.log(date);
       let day = date[6] + date[7];
-      let month = date[4] === 0 ? date[5] : date[4] + date[5];
-      console.log(month + "月" + day + 1 + "日");
+      let month = date[4] == "0" ? date[5] : date[4] + date[5];
+      // console.log(month + "月" + day + 1 + "日");
       return month + "月" + day + "日";
     },
   },
@@ -126,5 +139,14 @@ export default {
 .body,
 .before {
   width: 100%;
+}
+.el-divider__text {
+  padding: 0px 23px;
+  color: #999999;
+  font-weight: bold;
+  font-size: 16px;
+}
+.el-divider__text.is-left {
+  left: 0;
 }
 </style>

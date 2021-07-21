@@ -1,11 +1,13 @@
 <template>
-  <div class="item">
-    <div class="item-content">
-      <p class="p-title">{{ title }}</p>
-      <p class="p-hint">{{ hint }}</p>
+  <a :href="url">
+    <div class="item">
+      <div class="item-content">
+        <p class="p-title">{{ title }}</p>
+        <p class="p-hint">{{ hint }}</p>
+      </div>
+      <img :src="imgUrl" alt="" class="item-img" />
     </div>
-    <img :src="imgUrl" alt="" class="item-img" />
-  </div>
+  </a>
 </template>
 
 <script>
@@ -21,11 +23,18 @@ export default {
     hint: {
       type: String,
     },
+    url: {
+      type: String,
+    },
   },
 };
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+  color: black;
+}
 .item {
   display: flex;
   justify-content: space-between;
