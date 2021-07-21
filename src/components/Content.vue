@@ -9,16 +9,49 @@
       :hint="item.hint"
     ></content-item>
     <!-- <div class="test" v-for="item in 5" :key="item" v-text="1"> -->
+    <div class="infinite-list" v-infinite-scroll="load" style="overflow: auto">
+      <div
+        class="before infinite-list-item"
+        v-for="item in beforeData"
+        :key="item.id"
+      >
+        <!-- <button @click="click(item, index)"></button> -->
+        <el-divider content-position="left">{{ beforeDate(item) }}</el-divider>
 
-    <div class="before" v-for="item in beforeStories" :key="item.id">
-      <content-item
-        :imgUrl="item.images"
-        :title="item.title"
-        :hint="item.hint"
-      ></content-item>
-      <!-- </div> -->
+        <content-item
+          :imgUrl="item.stories[0].images"
+          :title="item.stories[0].title"
+          :hint="item.stories[0].hint"
+        ></content-item>
+        <content-item
+          :imgUrl="item.stories[1].images"
+          :title="item.stories[1].title"
+          :hint="item.stories[1].hint"
+        ></content-item>
+        <content-item
+          :imgUrl="item.stories[2].images"
+          :title="item.stories[2].title"
+          :hint="item.stories[2].hint"
+        ></content-item>
+        <content-item
+          :imgUrl="item.stories[3].images"
+          :title="item.stories[3].title"
+          :hint="item.stories[3].hint"
+        ></content-item>
+        <content-item
+          :imgUrl="item.stories[4].images"
+          :title="item.stories[4].title"
+          :hint="item.stories[4].hint"
+        ></content-item>
+        <content-item
+          :imgUrl="item.stories[5].images"
+          :title="item.stories[5].title"
+          :hint="item.stories[5].hint"
+        ></content-item>
+      </div>
     </div>
-    <button type="button" @click="loadMore">点击加载更多</button>
+
+    <!-- <button type="button" @click="loadMore">点击加载更多</button> -->
   </div>
   <!-- </mescroll-vue> -->
 </template>
@@ -50,33 +83,28 @@ export default {
       console.log(item);
       console.log(index);
     },
-    loadMore() {
+    load() {
       // let el = document.querySelector(".body");
       axios({
         url: "/api/3/news/before/" + this.date,
       }).then((res) => {
         // console.log(res);
         // this.addDivider(res.data.stories);
-        this.beforeStories = this.beforeStories.concat(res.data.stories);
+        this.beforeData = this.beforeData.concat(res.data);
         // console.log(this.beforeData);
         // console.log(this.stories);
         this.date -= 1;
         // console.log(this.beforeData[0].stories[0]);
       });
     },
-    addDivider(item) {
-      let body = document.querySelector(".divider");
-      let divider = document.createElement("el-divider");
-      divider.appendChild(body);
-      divider.setAttribute("content-position", "left");
-      divider.innerText = this.beforeDate(item);
-    },
     beforeDate(item) {
-      console.log(item.date - 1);
+      // console.log(item.date - 1);
       console.log(typeof item.date);
       let date = String(item.date).split("");
+      console.log(date);
       let day = date[6] + date[7];
-      let month = date[0] === 0 ? date[1] : date[0] + date[1];
+      let month = date[4] === 0 ? date[5] : date[4] + date[5];
+      console.log(month + "月" + day + 1 + "日");
       return month + "月" + day + "日";
     },
   },
@@ -95,7 +123,8 @@ export default {
 };
 </script>
 <style scoped>
-.body {
-  max-width: 100%;
+.body,
+.before {
+  width: 100%;
 }
 </style>

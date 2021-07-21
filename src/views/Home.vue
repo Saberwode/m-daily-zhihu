@@ -26,7 +26,4 @@ export default {
 body {
   width: 100%;
 }
-.body {
-  width: 100%;
-}
 </style>

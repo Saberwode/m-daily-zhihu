@@ -6,26 +6,6 @@
         <p class="main-title">{{ item.title }}</p>
         <p class="author">{{ item.hint }}</p>
       </swiper-slide>
-      <!--
-      <swiper-slide>
-        <img src="../assets/img/2.jpg" alt="" />
-      </swiper-slide>
-
-      <swiper-slide>
-        <img src="../assets/img/3.jpg" alt="" />
-      </swiper-slide>
-
-      <swiper-slide>
-        <img src="../assets/img/4.jpg" alt="" />
-      </swiper-slide>
-
-      <swiper-slide>
-        <img src="../assets/img/1.jpg" alt="" />
-      </swiper-slide>
-
-      <swiper-slide>
-        <img src="../assets/img/5.jpg" alt="" />
-      </swiper-slide> -->
 
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
