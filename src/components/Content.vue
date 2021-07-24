@@ -1,6 +1,6 @@
 <template>
-  <!-- <mescroll-vue :up="mescrollUp"> -->
   <div class="body">
+    <!-- 最新的故事 -->
     <content-item
       v-for="item in stories"
       :key="item.id"
@@ -9,7 +9,7 @@
       :hint="item.hint"
       :url="item.url"
     ></content-item>
-    <!-- <div class="test" v-for="item in 5" :key="item" v-text="1"> -->
+    <!-- 下拉刷新 -->
     <div
       class="infinite-list"
       v-infinite-scroll="load"
@@ -22,9 +22,9 @@
         v-for="item in beforeData"
         :key="item.id"
       >
-        <!-- <button @click="click(item, index)"></button> -->
+        <!-- 除去最新的故事，上一天的故事开始，故事内容前都会跟着一个日期，作为一个整体 -->
         <el-divider content-position="left">{{ beforeDate(item) }}</el-divider>
-
+        <!-- 每天有六个故事 -->
         <content-item
           :imgUrl="item.stories[0].images"
           :title="item.stories[0].title"
@@ -84,40 +84,24 @@ export default {
       beforeStories: [],
       beforeData: [],
       date: String,
-
-      mescrollUp: {
-        callback: this.loadMore,
-      },
-      mescroll: null, // mescroll实例对象
     };
   },
   methods: {
-    click(item, index) {
-      console.log(item);
-      console.log(index);
-    },
+    // 下拉加载函数
     load() {
-      // let el = document.querySelector(".body");
       axios({
         url: "/api/3/news/before/" + this.date,
       }).then((res) => {
-        // console.log(res);
-        // this.addDivider(res.data.stories);
         this.beforeData = this.beforeData.concat(res.data);
-        // console.log(this.beforeData);
-        // console.log(this.stories);
+
         this.date -= 1;
-        // console.log(this.beforeData[0].stories[0]);
       });
     },
+    // 计算日期
     beforeDate(item) {
-      // console.log(item.date - 1);
-      // console.log(typeof item.date);
       let date = String(item.date).split("");
-      // console.log(date);
       let day = date[6] + date[7];
       let month = date[4] == "0" ? date[5] : date[4] + date[5];
-      // console.log(month + "月" + day + 1 + "日");
       return month + "月" + day + "日";
     },
   },
@@ -126,11 +110,8 @@ export default {
     axios({
       url: "/api/3/stories/latest",
     }).then((res) => {
-      // console.log(res);
       this.stories = res.data.stories;
-      // console.log(this.stories);
       this.date = res.data.date;
-      // console.log(this.date);
     });
   },
 };

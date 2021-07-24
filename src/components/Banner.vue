@@ -20,37 +20,17 @@ export default {
     return {
       swiperOptions: {
         pagination: ".swiper-pagination",
+        // 是否可以点击
         paginationClickable: true,
         loop: true,
         autoplay: 3000,
         autoplayDisableOnInteraction: false,
+        // 这种方式设置会报错。。
         // autoplay: {
         //   delay: 1000,
         //   disableOnInteraction: false,
         // },
       },
-      swiperList: [
-        {
-          id: 1,
-          url: require("../assets/img/1.jpg"),
-        },
-        {
-          id: 2,
-          url: require("../assets/img/2.jpg"),
-        },
-        {
-          id: 3,
-          url: require("../assets/img/3.jpg"),
-        },
-        {
-          id: 4,
-          url: require("../assets/img/4.jpg"),
-        },
-        {
-          id: 5,
-          url: require("../assets/img/5.jpg"),
-        },
-      ],
       stories: [],
       // author:[],
     };
