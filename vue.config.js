@@ -1,7 +1,7 @@
 module.exports = {
     devServer: {
         proxy: {
-            '/api': {
+            '^/api': {
                 target: 'http://news-at.zhihu.com',
                 ws: true,
                 changeOrigin: true

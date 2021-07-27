@@ -26,40 +26,12 @@
         <el-divider content-position="left">{{ beforeDate(item) }}</el-divider>
         <!-- 每天有六个故事 -->
         <content-item
-          :imgUrl="item.stories[0].images"
-          :title="item.stories[0].title"
-          :hint="item.stories[0].hint"
-          :url="item.stories[0].url"
-        ></content-item>
-        <content-item
-          :imgUrl="item.stories[1].images"
-          :title="item.stories[1].title"
-          :hint="item.stories[1].hint"
-          :url="item.stories[1].url"
-        ></content-item>
-        <content-item
-          :imgUrl="item.stories[2].images"
-          :title="item.stories[2].title"
-          :hint="item.stories[2].hint"
-          :url="item.stories[2].url"
-        ></content-item>
-        <content-item
-          :imgUrl="item.stories[3].images"
-          :title="item.stories[3].title"
-          :hint="item.stories[3].hint"
-          :url="item.stories[3].url"
-        ></content-item>
-        <content-item
-          :imgUrl="item.stories[4].images"
-          :title="item.stories[4].title"
-          :hint="item.stories[4].hint"
-          :url="item.stories[4].url"
-        ></content-item>
-        <content-item
-          :imgUrl="item.stories[5].images"
-          :title="item.stories[5].title"
-          :hint="item.stories[5].hint"
-          :url="item.stories[5].url"
+          v-for="i in item.stories"
+          :key="i.id"
+          :imgUrl="i.images"
+          :title="i.title"
+          :hint="i.hint"
+          :url="i.url"
         ></content-item>
       </div>
     </div>
@@ -88,31 +60,54 @@ export default {
   },
   methods: {
     // 下拉加载函数
-    load() {
-      axios({
+    async load() {
+      const res = await axios({
         url: "/api/3/news/before/" + this.date,
-      }).then((res) => {
-        this.beforeData = this.beforeData.concat(res.data);
-
-        this.date -= 1;
       });
+      if (res?.data) {
+        this.beforeData = this.beforeData.concat(res.data);
+        this.date -= 1;
+      }
+      // axios({
+      //   url: "/api/3/news/before/" + this.date,
+      // }).then((res) => {
+      //   this.beforeData = this.beforeData.concat(res.data);
+      //   this.date -= 1;
+      // });
     },
     // 计算日期
     beforeDate(item) {
       let date = String(item.date).split("");
       let day = date[6] + date[7];
       let month = date[4] == "0" ? date[5] : date[4] + date[5];
-      return month + "月" + day + "日";
+      // return month + "月" + day + "日";
+      return `${month}月${day}日`;
     },
   },
   computed: {},
-  created() {
-    axios({
+  async created() {
+    const res = await axios({
       url: "/api/3/stories/latest",
-    }).then((res) => {
+    });
+    if (res?.data?.stories) {
       this.stories = res.data.stories;
       this.date = res.data.date;
-    });
+      console.log(res);
+    }
+    // const res1 = await axios({
+    //   url: "/api/3/news/before/20210727",
+    // });
+    // if (res?.data?.stories) {
+    //   // this.stories = res.data.stories;
+    //   // this.date = res.data.date;
+    //   console.log(res1);
+    // }
+    // axios({
+    //   url: "/api/3/stories/latest",
+    // }).then((res) => {
+    //   this.stories = res.data.stories;
+    //   this.date = res.data.date;
+    // });
   },
 };
 </script>

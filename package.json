@@ -11,6 +11,8 @@
     "core-js": "^3.6.5",
     "element-ui": "^2.15.3",
     "mescroll.js": "^1.4.2",
+    "num2capital": "^1.0.5",
+    "nzh": "^1.0.5",
     "swiper": "^5.4.5",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^2.6.7",

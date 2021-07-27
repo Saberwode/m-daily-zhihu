@@ -17,31 +17,21 @@ export default {
   name: "Header",
   computed: {
     date() {
-      let date = new Date();
+      const date = new Date();
       let year = date.getFullYear();
       return year;
     },
     month() {
-      let chin_month = [
-        "一",
-        "二",
-        "三",
-        "四",
-        "五",
-        "六",
-        "七",
-        "八",
-        "九",
-        "十",
-      ];
-      let date = new Date();
+      const nzhcn = require("../../node_modules/nzh/cn"); //直接使用简体中文
+      const date = new Date();
       let month1 = date.getMonth(); //存储月份
-      let month = chin_month[month1];
-      return month;
+      month1 = nzhcn.encodeS(month1 + 1);
+      // console.log(month1);
+      return month1;
     },
     day() {
-      let date = new Date();
-      var day = date.getDate(); //存储日期
+      const date = new Date();
+      let day = date.getDate(); //存储日期
       return day;
     },
   },
